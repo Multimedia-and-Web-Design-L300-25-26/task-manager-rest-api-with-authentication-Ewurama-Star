@@ -31,6 +31,11 @@ JWT_SECRET=your_secret_key
 
 Do not commit the `.env` file to version control.
 
+Note about MongoDB:
+
+- This project expects a running MongoDB instance reachable via `MONGO_URI`.
+- On Windows you can install MongoDB as a service (or run `mongod` manually). Start MongoDB before running the app (`npm run dev` or `npm start`).
+
 ---
 
 ## Running the Application
@@ -60,6 +65,10 @@ npm test
 ```
 
 All tests must pass before submission.
+
+Test database:
+
+- Tests use a separate database (see `.env.test`). Set `MONGO_URI` in `.env.test` to point to a test MongoDB instance (e.g. `mongodb://localhost:27017/taskmanager_test`).
 
 ---
 
@@ -168,6 +177,17 @@ Implement the following routes:
 | DELETE | `/api/tasks/:id`   | Delete a task by ID          | Yes           |
 
 ---
+
+## Examples (quick)
+
+- Register (POST /api/auth/register): JSON body `{ "email": "user@example.com", "password": "secret" }` — returns user object (no password).
+- Login (POST /api/auth/login): JSON body `{ "email": "user@example.com", "password": "secret" }` — returns `{ "token": "<jwt>" }`.
+- Create task (POST /api/tasks): Header `Authorization: Bearer <token>` and body `{ "title": "Buy milk", "description": "2 liters" }`.
+
+
+## Commit guidance (optional)
+
+- Make small, meaningful commits. Example: "feat(auth): add register endpoint" or "fix(db): await DB connection before starting server".
 
 ## Submission
 
